@@ -2,6 +2,8 @@ const crypto = require('crypto');
 const tokenpage = require('./tokenpage');//html模板，即返回url的页面
 const textpage = require('./textpage');//html模板，即返回url的页面
 const {insert,find} = require('../db/operations');
+const hljs = require('highlight.js');
+var htmlencode = require('htmlencode');
 
 function makeMD5(obj){//根据内容，作者和时间戳产生一个MD5值作为令牌
   var md5 = crypto.createHash('md5');//创建一个md5 hash算法
@@ -20,12 +22,15 @@ var fn_add=async (ctx,next)=>{//当用户点击paste时
 }
 
 var fn_getByToken = async (ctx,next)=>{//当用户使用令牌访问内容时
+  console.log(ctx.params);
   if(ctx.params.token=='favicon.ico'){//令牌为空
     return;
   }
   let token=ctx.params;//令牌
   await find(token).then((data)=>{//异步从数据库中得到数据
-    ctx.body=textpage(data.poster,data.time,data.content);//在回调中返回html模板
+    const highlightedCode = hljs.highlight(data.syntax,data.content).value//语法高亮
+    finalcode=htmlencode.htmlEncode(highlightedCode);
+    ctx.body=textpage(data.poster,data.time,highlightedCode);//在回调中返回html模板
   });
 }
 

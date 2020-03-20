@@ -6,6 +6,7 @@ function insert(obj){
       if(err){
         console.log(err);
       }
+      console.log("saved:"+obj.token);
     })
 }
 

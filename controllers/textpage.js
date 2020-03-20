@@ -5,6 +5,9 @@ module.exports=function(poster,time,content){
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible">
         <title>Mybin</title>
+        <link rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
     </head>
     <body>
         <div class="block">
@@ -15,9 +18,7 @@ module.exports=function(poster,time,content){
                 Paste from ${poster} at ${time}
             </p>
             <div class="descWrapper">
-                <p class="token">
-                    ${content}
-                </p>
+                <pre>${content}</pre>
             </div>
         </div>
     </body>
@@ -46,18 +47,16 @@ module.exports=function(poster,time,content){
         .descWrapper{
             text-align: left;
             margin: 12px 36px 0 36px;
-            font-size: 12px;
             color:rgb(231, 16, 59);
-            font-weight: 800;
-            /* min-height: 240px; */
+            min-height: 240px; 
             border-radius: 8px;
             background-color: #e4e2e2d2;
         }
-        .descWrapper p{
-            padding-left: 18px;
-            padding-right: 18px;
-            font-size: 16px;
-            font-weight: 600;
+        pre{
+            color: black;
+            font-weight: 600px;
+            padding-left: 16px;
+            padding-top: 16px;
         }
         .upperdesc{
             padding-top: 18px;
@@ -68,7 +67,7 @@ module.exports=function(poster,time,content){
             padding-bottom: 18px;
         }
         .token{
-            color: gray;
+            /* color: gray; */
             min-height: 240px;
         }
         </style>
